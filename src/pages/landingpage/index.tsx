@@ -1,9 +1,9 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { FaGooglePlay, FaInstagram } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
 import {
-  Container, Content, NavBar, Form, Footer, ButtonSend
+  Container, Content, NavBar, Form, Footer, ButtonSend,
 } from './styles';
 
 import Logo from '../../assets/logo.svg';
@@ -20,30 +20,28 @@ import api from '../../services/api';
 // import ForYoourCompany from '../forYourCompany';
 // import OurTeam from '../team';
 
-
-
 const LandingPage: React.FC = () => {
   const history = useHistory();
 
   const [newEmail, setNewEmail] = useState('');
   const [formData, setFormData] = useState({
     email: '',
-  })
+  });
 
- async function handleAddEmail(event: ChangeEvent <HTMLInputElement>){
-   const response = await api.post('/users', {
-      email : event.target.value,
-   })
+  async function handleAddEmail(event: ChangeEvent<HTMLInputElement>) {
+    const response = await api.post('/users', {
+      email: event.target.value,
+    });
 
-   const email = response.data;
-   setFormData({...formData, email});
+    const email = response.data;
+    setFormData({ ...formData, email });
 
-  //  const { name, value } = event.target
-  //  setFormData({...formData,[name]: value });
+    //  const { name, value } = event.target
+    //  setFormData({...formData,[name]: value });
   }
 
-  function sendToHome(){
-    //colocar o toast aqui
+  function sendToHome() {
+    // colocar o toast aqui
     history.push('/');
   }
 
@@ -78,7 +76,7 @@ const LandingPage: React.FC = () => {
         <img src={Celular} alt="Celular" />
       </Content>
 
-      <Form onSubmit={handleAddEmail}>
+      <Form onSubmit={handleSubmit}>
         <h1>Conheça mais sobre a meu troco</h1>
         <span>Deixe seu e-mail abaixo para entrarmos em contato</span>
 
@@ -89,13 +87,13 @@ const LandingPage: React.FC = () => {
           onChange={(e) => setNewEmail(e.target.value)}
         />
 
-      <ButtonSend>
-        <button type ="submit" onClick={(e)=>handleAddEmail}>
-          Enviar
-        </button>
+        <ButtonSend>
+          <button type="submit" onClick={(e) => handleSubmit}>
+            Enviar
+          </button>
 
-      </ButtonSend>
-      
+        </ButtonSend>
+
       </Form>
       <Footer>
         <div>
