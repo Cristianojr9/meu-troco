@@ -6,6 +6,8 @@ import {
   Container, Content, NavBar, Form, Footer, ButtonSend,
 } from './styles';
 
+import { toast } from 'react-toastify';
+
 import Logo from '../../assets/logo.svg';
 import Celular from '../../assets/celular.svg';
 import api from '../../services/api';
@@ -29,7 +31,7 @@ const LandingPage: React.FC = () => {
 
     await api.post('/users/email', {email});
 
-    alert('Email cadastrado com sucesso!');
+    toast.success('Email cadastrado com sucesso!')
   }
 
   return (

@@ -472,13 +472,13 @@ export const Footer = styled.div`
       font-size: 35px;
       background-color: #FD622E;
 
-      transition: 0.2s;
+      transition: 0.4s;
 
-      /* &:hover {
-        background: #FFFF;
+      &:hover {
+        background: #ff5514;
         color: white;
         box-shadow: 2px 2px #1111;
-      } */
+      }
 
   }
  `;
