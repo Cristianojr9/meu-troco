@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { FaGooglePlay, FaInstagram } from 'react-icons/fa';
 import { AiOutlineMail } from 'react-icons/ai';
 import { Link, useHistory } from 'react-router-dom';
@@ -21,28 +21,15 @@ import api from '../../services/api';
 // import OurTeam from '../team';
 
 const LandingPage: React.FC = () => {
-  const history = useHistory();
 
-  const [newEmail, setNewEmail] = useState('');
-  const [formData, setFormData] = useState({
-    email: '',
-  });
+  const [email, setEmail] = useState('');
 
-  async function handleAddEmail(event: ChangeEvent<HTMLInputElement>) {
-    const response = await api.post('/users', {
-      email: event.target.value,
-    });
+  async function createNewUser(event: FormEvent) {
+    event.preventDefault();
 
-    const email = response.data;
-    setFormData({ ...formData, email });
+    await api.post('/users/email', {email});
 
-    //  const { name, value } = event.target
-    //  setFormData({...formData,[name]: value });
-  }
-
-  function sendToHome() {
-    // colocar o toast aqui
-    history.push('/');
+    alert('Email cadastrado com sucesso!');
   }
 
   return (
@@ -76,25 +63,26 @@ const LandingPage: React.FC = () => {
         <img src={Celular} alt="Celular" />
       </Content>
 
-      <Form onSubmit={handleSubmit}>
-        <h1>Conheça mais sobre a meu troco</h1>
-        <span>Deixe seu e-mail abaixo para entrarmos em contato</span>
+        <form onSubmit={createNewUser}>
+          <Form>
+          <h1>Conheça mais sobre a meu troco</h1>
+          <span>Deixe seu e-mail abaixo para entrarmos em contato</span>
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value)}
-        />
+          <input  
+            type="email"
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
         <ButtonSend>
-          <button type="submit" onClick={(e) => handleSubmit}>
+          <button type="submit">
             Enviar
           </button>
 
         </ButtonSend>
+        </Form>
+      </form>
 
-      </Form>
       <Footer>
         <div>
           <h2>Meu Troco</h2>
